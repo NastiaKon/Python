@@ -102,27 +102,57 @@ def del_f():
 def replace():
     name = str(input('Введите имя того, что надо переместить: '))
     dir = str(input('Введите имя папки: '))
-    dir1 = os.path.isdir(os.path.join(pathway, dir))
-    file1 = os.path.isfile(os.path.join(pathway, name))
-    if dir1:
-        os.replace(os.path.join(pathway, name), os.path.join(pathway, dir, 'repl1'))
-        return print('Папка ', os.path.join(pathway, name), 'перемещена в ', os.path.join(pathway, dir, 'repl1'))
-    elif file1:
-        os.replace(os.path.join(pathway, name), os.path.join(pathway, dir))
-        return print('Файл ', os.path.join(pathway, name), 'перемещен в ', os.path.join(pathway, dir, 'repl1'))
+    var = os.environ.get("USERNAME")
+    pathw = os.getcwd()
+    if dir.lower() == var.lower():
+        var1 = os.getcwd()
+        dir1 = os.path.isdir(var1)
+        file1 = os.path.isfile(os.path.join(pathw, name))
+        if dir1:
+            os.replace(os.path.join(pathw, name), os.path.join(pathway, 'repl1'))
+            return print('Папка ', os.path.join(pathway, name), 'перемещена в ', os.path.join(pathway, dir, 'repl1'))
+        elif file1:
+            os.replace(os.path.join(pathw, name), os.path.join(pathway, dir))
+            return print('Файл ', os.path.join(pathway, name), 'перемещен в ', os.path.join(pathway, dir, 'repl1'))
+        else:
+            return print('--------------Что-то указано не правильно--------------')
+
     else:
-        return print('--------------Что-то указано не правильно--------------')
+        dir1 = os.path.isdir(os.path.join(pathway, dir))
+        file1 = os.path.isfile(os.path.join(pathw, name))
+        if dir1:
+            os.replace(os.path.join(pathw, name), os.path.join(pathway, dir, 'repl1'))
+            return print('Папка ', os.path.join(pathway, name), 'перемещена в ', os.path.join(pathway, dir, 'repl1'))
+        elif file1:
+            os.replace(os.path.join(pathw, name), os.path.join(pathway, dir))
+            return print('Файл ', os.path.join(pathw, name), 'перемещен в ', os.path.join(pathway, dir, 'repl1'))
+        else:
+            return print('--------------Что-то указано не правильно--------------')
 
 
 def copyf():
     name = str(input('Введите имя файла: '))
     dir = str(input('Введите имя папки: '))
-    dir1 = os.path.isdir(os.path.join(pathway, dir))
-    file1 = os.path.isfile(os.path.join(pathway, name))
-    if dir1 and file1:
-        shutil.copyfile(os.path.join(pathway, name), os.path.join(pathway, dir, 'new'))
-        return print('Файл ', os.path.join(pathway, name), 'копирован в ', os.path.join(pathway, dir, 'new'))
-    elif file1 is False:
-        return print('--------------Файл не найден--------------')
+    var = os.environ.get("USERNAME")
+    pathw = os.getcwd()
+    if dir.lower() == var.lower():
+        var1 = os.getcwd()
+        dir1 = os.path.isdir(var1)
+        file1 = os.path.isfile(os.path.join(pathw, name))
+        if dir1 and file1:
+            shutil.copyfile(os.path.join(pathw, name), os.path.join(pathway, 'new.txt'))
+            return print('Файл ', os.path.join(pathw, name), 'копирован в ', os.path.join(pathway, 'new.txt'))
+        elif file1 is False:
+            return print('--------------Файл не найден--------------')
+        else:
+            return print('--------------Директория не найдена--------------')
     else:
-        return print('--------------Директория не найдена--------------')
+        dir1 = os.path.isdir(os.path.join(pathway, dir))
+        file1 = os.path.isfile(os.path.join(pathw, name))
+        if dir1 and file1:
+            shutil.copyfile(os.path.join(pathw, name), os.path.join(pathway, dir, 'new'))
+            return print('Файл ', os.path.join(pathw, name), 'копирован в ', os.path.join(pathway, dir, 'new'))
+        elif file1 is False:
+            return print('--------------Файл не найден--------------')
+        else:
+            return print('--------------Директория не найдена--------------')
